@@ -1,0 +1,45 @@
+=====创建笔记本=====
+客户端：
+ a.发送请求
+  单击创建按钮,发送请求
+  提交数据：笔记本名称，用户ID
+ b.回调函数
+  成功：关闭对话框,添加一个笔记本li
+  失败：给出提示信息alert
+服务器端：
+ /notebook/add.do
+-->DispatcherServlet
+-->HandlerMapping
+-->AddBookController.execute
+  -->NoteBookService
+  -->NoteBookDao-->cn_notebook（插入）
+-->返回NoteResult格式json结果
+
+========创建笔记操作=========
+模仿创建笔记本的实现过程，
+先分析，再实现
+
+客户端：
+ a.发送请求
+  弹出添加笔记对话框后，输入笔记标题
+点创建,发出请求
+  提交数据：笔记标题,用户ID,
+  选中的笔记本ID
+
+ b.回调处理
+  关闭对话框,生成一个笔记li添加到
+  笔记列表区
+服务器端：
+
+/note/add.do
+-->DispatcherServlet
+-->HandlerMapping
+-->AddNoteController.execute
+  -->NoteService
+  -->NoteDao-->cn_note（插入）
+-->返回NoteResult结构的json
+
+
+
+
+  

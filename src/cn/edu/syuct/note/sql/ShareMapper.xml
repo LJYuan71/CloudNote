@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="cn.edu.syuct.note.dao.ShareDao">
+
+<select id="findById" parameterType="string"
+	resultType="cn.edu.syuct.note.entity.Share">
+select * from cn_share
+where cn_share_id=#{id}
+</select>
+
+<select id="findLikeTitle" 
+	parameterType="string"
+	resultType="map">
+select cn_share_title,cn_share_id 
+from cn_share
+where cn_share_title like #{title}
+</select>
+
+<select id="findByNoteId" parameterType="string"
+resultType="cn.edu.syuct.note.entity.Share">
+select * from cn_share
+where cn_note_id=#{noteId}
+</select>
+
+<insert id="save" 
+parameterType="cn.edu.syuct.note.entity.Share">
+insert into cn_share
+	(cn_share_id,cn_share_title,
+	cn_share_body,cn_note_id)
+values (#{cn_share_id},#{cn_share_title},
+	#{cn_share_body},#{cn_note_id})
+</insert>
+
+</mapper>

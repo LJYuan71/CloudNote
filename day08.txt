@@ -1,0 +1,8 @@
+=======回收站处理=======
+1.回收站列表显示
+用户点击左下方"回收站"按钮时,
+从cn_note表提取出该用户删除的
+笔记信息,然后显示到回收站列表
+select * from cn_note
+where cn_user_id=? 
+and cn_note_status_id='2'

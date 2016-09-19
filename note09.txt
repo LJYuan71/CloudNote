@@ -1,0 +1,163 @@
+1.Spring�������
+try{
+  con.setAutoCommit(false);
+  //����ҵ���������regist()
+  con.commit();
+}catch(){
+  con.rollback();
+}
+
+*1.������
+ �����Ǻ���ݿ�����й�ϵ����
+ �����ύ�ͳ���ǰ��ִ�е�sql����
+ (�����ɾ����Ч)
+
+ ʹ��Ŀ��:Ϊ�˱���ҵ���?db���
+          �������ԡ�
+
+2.Spring�ṩ�˶��������֧��
+  --֧����ݿ���ʼ���API
+  --֧���������
+
+ Spring����AOP��������������.
+����ʵ���ڲ��޸�ԭ��������������
+ʵ��������ƹ��ܡ�
+
+Spring�ṩ������������?ʽ��
+a.���ʽ������?��дJava���룩
+  TransactionTemplate
+�Ƽ�b.����ʽ������?��д���ã�
+ XML�汾����
+ ***ע��汾����****���������գ�
+ --����DataSourceTransactionManager
+ --��������ע������<tx:annotation>
+ --��Ŀ���������ǰ���@Transactional
+
+3.Spring���������Ŀ��ƣ��˽⣩
+ a.��������ɶ���д����
+  Spring��Ϊ�ɶ�д�����ֻ������
+  Ĭ��Ϊ�ɶ�д,һ��ֻ�漰��ѯ����
+  ������ֻ������
+ @Transactional(readOnly=true)
+
+ b.���������Ƿ�ع�
+  Spring����RuntimeException�쳣,
+  ������ع�;����������ʱ�쳣����
+  ����ع�
+@Transactional(rollbackFor=IOException.class)
+����IOExceptionҲ�ᷢ��ع�
+ 
+ ���飺�Զ����쳣��RuntimeException�̳�
+
+ c.�������񴫲�����
+ ��������������Ʒ���������һ��
+������Ʒ���ʱ,����ѡ����ʵĴ�������
+Ĭ����REQUIRED����,����ʹ��ǰ������
+
+a.f1-->����b.f2
+b.f2
+REQUIRED_NEW
+public void f1(){
+  //һ�����߼�����
+  b.f2();
+}
+
+d.����������뼶��
+ �ɵ͵�������
+ READ_UNCOMMITED//��δ�ύ
+ READ_COMMITED//�����ύ
+ REPEATABLE_READ//���ظ���
+ SERIALIZABLE//���л�
+ DEFAULTĬ��,�����ݿ���뼶��
+�Զ�ѡ��OracleΪREAD_COMMITED
+ 
+����Խ�߰�ȫ��Խ��,���Ǵ���Ч��Խ��.
+����Խ�Ͱ�ȫ��Խ��,���ǲ�����������ǿ
+ƽʱʹ�ý������Ĭ��DEFAULT������
+���������ٲ��ü�����ƴ���
+
+findById(1)
+//����
+����//������һ�����-->findById(1)
+//����
+
+public void f1(){
+  cccc
+ synchronized (obj){
+ dddd
+ }
+ 
+  eeee
+}
+
+select * from cn_note 
+where cn_note_id=1 for update
+
+4.Spring AOPӦ��
+
+AOP����ŵ㣺���Զ�̬��һ���������
+  ���뵽ָ����Ŀ�귽���ϡ�
+����ʹ�ṹ������,Ҳ��ʵ������ظ�����
+Aspect Oriented Programming
+��������/������
+
+OOP�����������,���ص�������
+AOP������������,���ص�����
+
+AOP��OOPΪ��
+
+AOP��̣���ע����ҵ���߼�����,��һЩ
+��ͨ�����߼��ʹ�ͳ�����߼����
+����������,��־��¼,�쳣����ȵ�
+
+���û�����
+  --��ͨ�����߼�
+  --����ʱ����ͬ
+
+======AOPӦ��======
+a.Ҫ����ʲô����-->���棨Aspect��
+b.�����ʱ��-->֪ͨ��Advice��
+����֪ͨ=ǰ��+����
+try
+  ǰ��֪ͨ@Before
+  //Ŀ�귽������
+  ����֪ͨ@AfterReturning
+}catch(){
+  �쳣֪ͨ@AfterThrowing
+}finally{
+  ����֪ͨ@After
+}
+c.����Щ�����������-->����㣨Pointcut��
+ --�����޶����ʽ
+  within(����)
+  ������ƥ����������Ŀ��
+  within(org.service.UserService)
+  within(org.service.*)//org.service����
+  within(org.service..*)//org.service���Ӱ���
+
+ --�����޶����ʽ
+execution(���η�? �������� ������(����) �׳��쳣?)
+ 
+execution(* find*(..))
+execution(* org.service.UserService.regist(..))
+execution(* org.service..*.*(..))
+
+�������ʽ����ʹ��!,&&,||��������ӡ�
+
+
+===========����=============
+�Ʊʼǣ��쳣����,�������쳣��,
+���쳣��Ϣ��¼���ļ��С�
+
+a.Ҫ����ʲô����
+   ���쳣��Ϣд�ļ�
+b.�����ʱ��
+    �����쳣����,ʹ���쳣֪ͨ
+    @AfterThrowing
+c.����Щ�����������
+   ��Controller���׷��
+   within(cn.edu.syuct.note.controller..*)
+
+
+
+

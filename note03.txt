@@ -1,0 +1,50 @@
+1.笔记本列表显示
+ 登录成功，一进入edit.html页面
+就显示登录用户的笔记本列表.
+
+客户端处理
+a.发请求
+ $(function(){
+   //页面载入发请求
+ })
+ 提交数据：用户ID
+b.回调函数
+  解析返回json数据,显示笔记本列表
+
+服务器端处理
+/notebook/loadbooks.do
+-->DispatcherServlet
+-->HandlerMapping
+-->LoadBooksController.execute
+  -->NoteBookService
+  -->NoteBookDao-->cn_notebook
+-->返回NoteResult结构的json数据
+
+2.加载笔记列表
+ 单击某个笔记本,加载笔记信息显示。
+
+客户端：
+ a.发送请求
+  笔记本li单击，发送请求
+  提交数据：当前点击li绑定的bookId值
+ b.回调函数
+  获取服务器json，将笔记信息显示成
+ 笔记列表
+服务器端：
+/note/loadnotes.do
+-->DispatcherServlet
+-->handlerMapping
+-->LoadNotesController.execute
+  -->NoteService
+  -->NoteDao-->cn_note
+-->返回NoteResult结构的json数据
+
+
+
+jQuery对象.on("事件类型","选择器",fn);
+$("#book_list").on("click","li",fn)
+
+
+
+
+

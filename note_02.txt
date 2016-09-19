@@ -1,0 +1,17 @@
+======注册======
+1)客户端
+ a.发送Ajax请求时机
+  点击注册按钮发送请求
+  提交用户名,昵称,密码
+ b.Ajax回调处理
+  注册成功,返回登录界面
+  注册失败,提示错误信息
+2)服务器端
+/user/regist.do
+-->DispatcherServlet
+-->handlermapping
+-->RegistController.execute
+  -->UserService
+  -->UserDao-->cn_user(插入)
+-->返回NoteResult格式的json数据
+

@@ -1,0 +1,36 @@
+=====笔记编辑========
+1.单击笔记操作
+用户单击笔记时，发送Ajax请求，
+从数据库cn_note取出笔记信息，
+呈现到笔记编辑区的标题和内容编辑器中
+
+
+/note/load.do（笔记ID）
+-->DispatcherServlet
+-->Handlermapping
+-->LoadNoteController.execute
+  -->NoteService
+  -->NoteDao-->cn_note(查询)
+-->返回NoteResult结构的json数据
+2.保存笔记操作
+用户单击“保存笔记”按钮,发送ajax请求
+提交笔记ID,笔记标题,笔记内容。
+服务器对cn_note记录做更新操作,
+更新完成后,采用alert给用户提示更新成功
+如果笔记标题发生改变,也需要修改笔记
+列表中列表项标题
+
+
+/note/update.do
+-->DispatcherSerlvet
+-->handlerMapping
+-->UpdateNoteController
+-->NoteService
+-->NoteDao-->cn_note(更新)
+-->返回NoteResult结构的json结果
+
+
+
+
+
+
